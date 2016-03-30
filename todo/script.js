@@ -5,6 +5,8 @@ var todos = JSON.parse(localStorage.getItem('todos')) || [];
 
 $(document).ready(function() {
 
+  //console.log($('body').changeColor('red'));
+
   for(var i = 0; i < todos.length; i++) {
     createToDo(todos[i]);
   }
@@ -34,6 +36,11 @@ $(document).ready(function() {
   // Our event listener that listens to click events on all 'delete-button'
   // elements inside our 'todo-list'
   $('#todo-list').on('click', '.delete-button', deleteTodo);
+
+  // Click handler for list items that calls our custom Plugin function
+  $('#todo-list li').click(function(e) {
+    $(this).changeColor('red');
+  });
 });
 
 // Our function for creating a ToDo entry
@@ -65,20 +72,3 @@ var deleteTodo = function(e) {
   $(this).parent().remove();
   //var todoIndex = todos.indexOf(this);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
