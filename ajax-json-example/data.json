@@ -1,0 +1,7 @@
+{
+  "todos": [
+    {"text": "This is a todo"},
+    {"text": "Another todo"},
+    {"text": "Yet another todo"}
+  ]
+}
