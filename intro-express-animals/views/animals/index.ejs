@@ -1,0 +1,11 @@
+<ul>
+  <% myAnimals.forEach(function(animal, index) { %>
+    <li><a href="/animals/<%= index %>"><%= animal.name %> is a <%= animal.type %></a></li>
+  <% }); %>
+</ul>
+
+<form method="post" action="/animals">
+  <input type="text" name="type">
+  <input type="text" name="name">
+  <input type="submit">
+</form>
