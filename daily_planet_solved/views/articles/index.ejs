@@ -1,0 +1,21 @@
+<% include ../partials/header.ejs %>
+
+<h1>Articles</h1>
+
+<% if (searchTerm) { %>
+  <% articles.forEach(function(article, idx) { %>
+    <% if (article.title.toLowerCase().indexOf(searchTerm) > -1 || article.body.toLowerCase().indexOf(searchTerm) > -1) { %>
+    <div class="well">
+      <a href="/articles/<%= idx %>"><h2><%= article.title %></h2></a>
+    </div>
+    <% } %>
+  <% }); %>
+<% } else { %>
+  <% articles.forEach(function(article, idx) { %>
+    <div class="well">
+      <a href="/articles/<%= idx %>"><h2><%= article.title %></h2></a>
+    </div>
+  <% }); %>
+<% } %>
+
+<% include ../partials/footer.ejs %>

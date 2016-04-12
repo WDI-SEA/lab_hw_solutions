@@ -1,0 +1,11 @@
+<% include ../partials/header.ejs %>
+
+<h1><%= article.title %></h1>
+
+<div class="well">
+  <p><%= article.body %></p>
+</div>
+
+<button class="delete-button" id="<%= index%>">Delete Article</button>
+
+<% include ../partials/footer.ejs %>

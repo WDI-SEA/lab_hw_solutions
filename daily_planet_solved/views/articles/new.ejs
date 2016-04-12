@@ -1,0 +1,19 @@
+<% include ../partials/header.ejs %>
+
+<h1>New Article</h1>
+
+<form action="/articles" method="POST" role="form">
+  <div class="form-group">
+    <label for="title" class="hidden">Title</label>
+    <input type="text" class="form-control" id="title" placeholder="Title" name="title">
+  </div>
+
+  <div class="form-group">
+    <label for="body" class="hidden">Body</label>
+    <textarea type="text" class="form-control" id="body" placeholder="Body" name="body"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<% include ../partials/footer.ejs %>
