@@ -1,0 +1,32 @@
+.delete-button {
+  padding: 5px;
+  background-color: red;
+  border-radius: 5px;
+  margin: 0 0 0 10px;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.edit-button {
+  padding: 5px;
+  background-color: lime;
+  border-radius: 5px;
+  margin: 0 0 0 10px;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.edit-button:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.user-name {
+  max-width: 250px;
+  margin: 20px 5px 5px 0 ;
+}
