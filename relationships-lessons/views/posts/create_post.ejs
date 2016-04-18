@@ -1,0 +1,10 @@
+<form method="post" action="/create_post">
+  <input type="text" name="title" placeholder="Enter title">
+  <textarea cols="20" rows="30" name="content" placeholder="Enter content"></textarea>
+  <select name="authorId">
+    <% authors.forEach(function(author) { %>
+      <option value="<%= author.id %>"><%= author.name %></option>
+    <% }); %>
+  </select>
+  <input type="submit" value="Submit">
+</form>
