@@ -1,6 +1,6 @@
 ### Installation
  - clone repo
- - run ```bash
+ - run ```
  createdb omdbDb
  npm install
  sequelize db:migrate
