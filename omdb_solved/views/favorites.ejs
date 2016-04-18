@@ -1,0 +1,3 @@
+<% favorites.forEach(function(favorite) { %>
+  <a href="/movies/<%= favorite.imdbId %>"><h1><%= favorite.title %> - <small><%= favorite.year %></small></h1></a>
+<% }); %>

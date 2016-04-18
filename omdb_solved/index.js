@@ -1,10 +1,13 @@
 var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var request = require('request');
+var db = require('./models');
+var bodyParser = require('body-parser');
 var app = express();
 
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/static'));
 
 app.get('/', function(req, res) {
@@ -25,12 +28,25 @@ app.get('/movies', function(req, res) {
 });
 
 app.get('/movies/:imdbID', function(req, res) {
-  // res.send(req.params.imdbID);
   var searchQuery = req.query.q ? req.query.q : '';
   var imdbID = req.params.imdbID;
   request('http://www.omdbapi.com/?i=' + imdbID, function(err, response, body) {
     res.render('movieShow', {movie: JSON.parse(body),
                              q: searchQuery});
+  });
+});
+
+app.get('/favorites', function(req, res) {
+  db.favorite.findAll().then(function(favorites) {
+    res.render('favorites', {favorites: favorites});
+  });
+});
+
+app.post('/favorites', function(req, res) {
+  var newFavorite = req.body;
+
+  db.favorite.create(newFavorite).then(function(favorite) {
+    res.status(200).send('Created Favorite');
   });
 });
 

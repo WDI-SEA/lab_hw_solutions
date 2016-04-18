@@ -1,6 +1,6 @@
-<h1><%= movie.Title %>
-  <small><%= movie.Year %></small>
-</h1>
+<h1><%= movie.Title %></h1>
+<h3><%= movie.Year %></h3>
+<button type="button" id="favorite-btn" data-imdbId="<%= movie.imdbID %>" class="btn btn-success">Add to Favorites</button>
 
 <a href="<%= '/movies/?q=' + q %>" class="btn btn-primary">&larr; Back to Search</a>
 
