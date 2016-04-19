@@ -53,9 +53,7 @@ app.post('/favorites', function(req, res) {
 app.get('/favorites/:imdbId/comments', function(req, res) {
   db.favorite.findOne({where: {imdbId: req.params.imdbId}}).then(function(favorite) {
     favorite.getComments().then(function(comments) {
-      console.log("id:", req.params.imdbId);
       request('http://www.omdbapi.com/?i=' + req.params.imdbId, function(err, response, body) {
-        console.log("OMDB:", body);
         res.render('comments', {movie: JSON.parse(body),
                                 comments: comments});
       });
