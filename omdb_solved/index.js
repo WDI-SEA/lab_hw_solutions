@@ -37,9 +37,20 @@ app.get('/movies/:imdbID', function(req, res) {
 });
 
 app.get('/favorites', function(req, res) {
-  db.favorite.findAll().then(function(favorites) {
-    res.render('favorites', {favorites: favorites});
-  });
+  var tag = req.query.tag;
+  console.log("tag:", tag);
+
+  if (tag) {
+    db.tag.find({where: {name: tag}}).then(function(tag) {
+      tag.getFavorites().then(function(favorites) {
+        res.render('favorites', {favorites: favorites});
+      });
+    });
+  } else {
+    db.favorite.findAll().then(function(favorites) {
+      res.render('favorites', {favorites: favorites});
+    });
+  }
 });
 
 app.post('/favorites', function(req, res) {
