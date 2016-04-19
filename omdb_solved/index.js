@@ -80,6 +80,13 @@ app.get('/favorites/:imdbId/tag', function(req, res) {
 app.post('/favorites/:imdbId/tag', function(req, res) {
   var tag = req.body;
   console.log("tag:", tag);
+
+  db.tag.findOrCreate({where: {name: tag.name}}).spread(function(tag, isCreated) {
+    db.favorite.findOne({where: {imdbId: req.params.imdbId}}).then(function(favorite) {
+      favorite.addTag(tag);
+      res.send({fav: favorite, tag: tag});
+    });
+  });
 });
 
 var port = 3000;
