@@ -1,0 +1,20 @@
+<h1><%= movie.Title %></h1>
+<div>
+	<%= movie.Plot %>
+</div>
+
+<h1>Comments</h1>
+<% comments.forEach(function(comment) { %>
+  <div>
+    <strong><%= comment.author %> says:</strong>
+    <%= comment.text %>
+  </div>
+<% }); %>
+
+<div>
+	<form method="POST" action="/favorites/<%= movie.imdbID %>/comments">
+	  Author: <input name="author" placeholder="author">
+	  Content: <input name="content" placeholder="comment text">
+	  <input type="submit" value="add comment">
+	</form>
+</div>

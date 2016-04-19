@@ -50,6 +50,31 @@ app.post('/favorites', function(req, res) {
   });
 });
 
+app.get('/favorites/:imdbId/comments', function(req, res) {
+  db.favorite.findOne({where: {imdbId: req.params.imdbId}}).then(function(favorite) {
+    favorite.getComments().then(function(comments) {
+      console.log("id:", req.params.imdbId);
+      request('http://www.omdbapi.com/?i=' + req.params.imdbId, function(err, response, body) {
+        console.log("OMDB:", body);
+        res.render('comments', {movie: JSON.parse(body),
+                                comments: comments});
+      });
+    });
+  });
+});
+
+app.post('/favorites/:imdbId/comments', function(req, res) {
+  var comment = req.body;
+  console.log("comment:", comment);
+
+  db.favorite.findOne({where: {imdbId: req.params.imdbId}}).then(function(favorite) {
+    favorite.createComment(comment).then(function(comment) {
+      //res.redirect('/favorites/' + req.imdbId + '/comments');
+      res.redirect(req.url);
+    });
+  })
+});
+
 var port = 3000;
 app.listen(port, function() {
   console.log("You're listening to the smooth sounds of port " + port);
