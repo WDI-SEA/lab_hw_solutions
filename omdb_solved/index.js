@@ -73,6 +73,12 @@ app.post('/favorites/:imdbId/comments', function(req, res) {
   })
 });
 
+app.get('/tags', function(req, res) {
+  db.tag.findAll().then(function(tags) {
+    res.render("tags", {tags: tags});
+  });
+});
+
 app.get('/favorites/:imdbId/tag', function(req, res) {
   res.render('tag', {imdbId: req.params.imdbId});
 });
