@@ -37,20 +37,9 @@ app.get('/movies/:imdbID', function(req, res) {
 });
 
 app.get('/favorites', function(req, res) {
-  var tag = req.query.tag;
-  console.log("tag:", tag);
-
-  if (tag) {
-    db.tag.find({where: {name: tag}}).then(function(tag) {
-      tag.getFavorites().then(function(favorites) {
-        res.render('favorites', {favorites: favorites});
-      });
-    });
-  } else {
-    db.favorite.findAll().then(function(favorites) {
-      res.render('favorites', {favorites: favorites});
-    });
-  }
+  db.favorite.findAll().then(function(favorites) {
+    res.render('favorites', {favorites: favorites});
+  });
 });
 
 app.post('/favorites', function(req, res) {
@@ -58,51 +47,6 @@ app.post('/favorites', function(req, res) {
 
   db.favorite.create(newFavorite).then(function(favorite) {
     res.status(200).send('Created Favorite');
-  });
-});
-
-app.get('/favorites/:imdbId/comments', function(req, res) {
-  db.favorite.findOne({where: {imdbId: req.params.imdbId}}).then(function(favorite) {
-    favorite.getComments().then(function(comments) {
-      request('http://www.omdbapi.com/?i=' + req.params.imdbId, function(err, response, body) {
-        res.render('comments', {movie: JSON.parse(body),
-                                comments: comments});
-      });
-    });
-  });
-});
-
-app.post('/favorites/:imdbId/comments', function(req, res) {
-  var comment = req.body;
-  console.log("comment:", comment);
-
-  db.favorite.findOne({where: {imdbId: req.params.imdbId}}).then(function(favorite) {
-    favorite.createComment(comment).then(function(comment) {
-      //res.redirect('/favorites/' + req.imdbId + '/comments');
-      res.redirect(req.url);
-    });
-  })
-});
-
-app.get('/tags', function(req, res) {
-  db.tag.findAll().then(function(tags) {
-    res.render("tags", {tags: tags});
-  });
-});
-
-app.get('/favorites/:imdbId/tag', function(req, res) {
-  res.render('tag', {imdbId: req.params.imdbId});
-});
-
-app.post('/favorites/:imdbId/tag', function(req, res) {
-  var tag = req.body;
-  console.log("tag:", tag);
-
-  db.tag.findOrCreate({where: {name: tag.name}}).spread(function(tag, isCreated) {
-    db.favorite.findOne({where: {imdbId: req.params.imdbId}}).then(function(favorite) {
-      favorite.addTag(tag);
-      res.redirect('/favorites?tag=' + tag.name);
-    });
   });
 });
 
