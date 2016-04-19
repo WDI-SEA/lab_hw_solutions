@@ -1,9 +1,8 @@
-<ul>
-	<% tags.forEach(function(tag) { %>
-	<li>
-		<a href="/favorites?tag=<%= tag.name %>">
-			<%= tag.name %>
-		</a>
-	</li>
-	<% }); %>
-</ul>
+<h1>All Tags</h1>
+<% tags.forEach(function(tag) { %>
+<h2>
+	<a href="/favorites?tag=<%= tag.name %>">
+		<%= tag.name %>
+	</a>
+</h2>
+<% }); %>

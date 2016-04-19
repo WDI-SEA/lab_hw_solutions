@@ -1,9 +1,22 @@
-<h1><%= movie.Title %></h1>
-<h3><%= movie.Year %></h3>
-<button type="button" id="favorite-btn" data-imdbId="<%= movie.imdbID %>" class="btn btn-success">Add to Favorites</button>
+<h1> (<%= movie.Year %>) <%= movie.Title %></h1>
 
-<a href="<%= '/movies/?q=' + q %>" class="btn btn-primary">&larr; Back to Search</a>
+<div class="row">
+	<div class="col-xs-4">
+		<img src="<%= movie.Poster %>" />
+	</div>
+	<div class="well col-xs-4">
+  		<p>
+  			<strong>Plot: </strong>
+  			<%= movie.Plot %>
+  		</p>
 
-<div class="well">
-  <p><%= movie.Plot %></p>
+  		<br>
+
+		<button type="button" id="favorite-btn" data-imdbId="<%= movie.imdbID %>" class="btn btn-success">
+			Add to Favorites
+		</button>
+		<a href="<%= '/movies/?q=' + q %>" class="btn btn-primary">&larr; Back to Search</a>
+	</div>
+	<div class="col-xs-4">
+	</div>
 </div>

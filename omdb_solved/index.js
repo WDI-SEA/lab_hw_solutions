@@ -101,7 +101,7 @@ app.post('/favorites/:imdbId/tag', function(req, res) {
   db.tag.findOrCreate({where: {name: tag.name}}).spread(function(tag, isCreated) {
     db.favorite.findOne({where: {imdbId: req.params.imdbId}}).then(function(favorite) {
       favorite.addTag(tag);
-      res.send({fav: favorite, tag: tag});
+      res.redirect('/favorites?tag=' + tag.name);
     });
   });
 });
