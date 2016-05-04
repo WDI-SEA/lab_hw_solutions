@@ -10,6 +10,10 @@ class DigitalItem < Item
         @download_size=download_size
     end
 
+    def weight
+        @weight = -1
+    end
+
     def stock amount
         false
     end

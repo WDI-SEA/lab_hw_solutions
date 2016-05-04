@@ -62,6 +62,11 @@ describe DigitalItem do
       @di.download_size=123.12
       expect(@di.download_size).to eq(123.12)
     end
+    it "should be able to get and set weight and default to 0" do
+      expect(@di.weight).to eq(-1)
+      @di.weight=4
+      expect(@di.weight).to eq(-1)
+    end
   end
 
   describe "Methods" do
