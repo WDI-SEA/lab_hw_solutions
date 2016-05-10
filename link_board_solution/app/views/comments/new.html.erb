@@ -1,0 +1,7 @@
+<h1>Post a Comment</h1>
+
+<%= bootstrap_form_for [@post, @comment] do |f| %>
+  <%= f.text_area :content %>
+
+  <%= f.primary %>
+<% end %>

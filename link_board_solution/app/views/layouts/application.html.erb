@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <title>LinkBoard</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'GA News', root_path, class: 'navbar-brand' %>
+    </div>
+  
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav navbar-right">
+      <% if @current_user %>
+        <li><%= link_to 'Logout', logout_path %></li>
+      <% else %>
+        <li><%= link_to 'Signup', signup_path %></li>
+        <li><%= link_to 'Login', login_path %></li>
+      <% end %>
+      </ul>
+    <% if @current_user %>
+      <p class="navbar-text navbar-right">Signed in as <%= @current_user.name %></p>
+    <% end %>
+    </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+
+  <div class="container">
+    <%= render 'partials/alert' %>
+  </div>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>

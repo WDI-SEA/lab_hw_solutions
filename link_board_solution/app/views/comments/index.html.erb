@@ -1,0 +1,10 @@
+<h1><%= link_to @post.title, @post.link %></h1>
+
+<%= link_to 'New Comment', new_post_comment_path(@post), class: 'btn btn-primary' %>
+
+<% @post.comment.each do |comment| %>
+<div class="well">
+  <p><%= comment.content %></p>
+  <strong>By <%= comment.user.name %></strong>
+</div>
+<% end %>
