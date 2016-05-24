@@ -22,7 +22,7 @@ fruitApp.controller('fruitVegController', ['$scope', '$timeout', function($scope
     // $timeout calls $digest as well.
     $timeout(function() {
       $scope.incorrectItems = document.querySelectorAll('.incorrect').length;
-    }, 100);
+    }, 0);
   }
 
   $scope.checkItem = function(name, columnName) {
