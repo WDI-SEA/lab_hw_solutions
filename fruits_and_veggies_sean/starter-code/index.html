@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fruit and Veggies</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="js/fruit_and_veggies.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="fruitVegApp">
+    <div class="container" ng-controller="fruitVegController">
+      <h1>Fruit and Veggies</h1>
+      <h2 ng-class="{'text-success': hasWon, 'text-danger': !hasWon}">{{message}}</h2>
+      <div class="row text-center">
+        <div class="col-xs-4">
+          <h2>Fruits</h2>
+          <div class="well" ng-class="{'correct': checkItem(fruit, 'fruits'), 'incorrect': !checkItem(fruit, 'fruits')}" ng-repeat="fruit in fruits track by $index">
+            <span class="item-name">{{fruit}}</span>
+            <button class="btn btn-primary pull-right" ng-click="move(fruit, 'fruits', 'mixed')">
+              <span class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <h2>Both</h2>
+          <div class="well" ng-repeat="item in mixed track by $index">
+            <button class="btn btn-primary pull-left" ng-click="move(item, 'mixed', 'fruits')">
+              <span class="glyphicon glyphicon-arrow-left"></span>
+            </button>
+            <span class="item-name">{{item}}</span>
+            <button class="btn btn-primary pull-right" ng-click="move(item, 'mixed', 'veggies')">
+              <span class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <h2>Veggies</h2>
+          <div class="well" ng-repeat="veggie in veggies track by $index" ng-class="{'correct': checkItem(veggie, 'veggies'), 'incorrect': !checkItem(veggie, 'veggies')}">
+            <button class="btn btn-primary pull-left" ng-click="move(veggie, 'veggies', 'mixed')">
+              <span class="glyphicon glyphicon-arrow-left"></span>
+            </button>
+            <span class="item-name">{{veggie}}</span>
+          </div>
+        </div>                        
+      </div>
+    </div>
+  </body>
+</html>
