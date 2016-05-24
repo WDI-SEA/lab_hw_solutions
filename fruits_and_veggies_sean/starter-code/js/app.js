@@ -1,5 +1,3 @@
-/* setup your angular app here */
-
 var fruitApp = angular.module('fruitVegApp', []);
 
 fruitApp.controller('fruitVegController', ['$scope', function($scope) {
@@ -14,6 +12,7 @@ fruitApp.controller('fruitVegController', ['$scope', function($scope) {
   $scope.move = function(name, originCol, destCol) {
     $scope[originCol].splice($scope[originCol].indexOf(name), 1);
     $scope[destCol].push(name);
+    $scope.incorrectItems = document.querySelectorAll('.incorrect').length;
     if($scope.mixed.length === 0) {
       $scope.checkForWin();
     }
@@ -29,8 +28,7 @@ fruitApp.controller('fruitVegController', ['$scope', function($scope) {
   }
 
   $scope.checkForWin = function() {
-    var badItems = document.querySelectorAll('.incorrect').length;
-    if(badItems) {
+    if($scope.incorrectItems) {
       $scope.hasWon = false;
       $scope.message = 'Something is wrong!';
     } else {
