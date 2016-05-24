@@ -1,5 +1,9 @@
 /* file for your css */
 
+span {
+  line-height: 32px;
+}
+
 .correct {
   background-color: #dff0d8;
 }
