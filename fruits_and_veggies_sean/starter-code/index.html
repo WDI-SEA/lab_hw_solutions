@@ -13,6 +13,7 @@
     <div class="container" ng-controller="fruitVegController">
       <h1>Fruit and Veggies</h1>
       <h2 ng-class="{'text-success': hasWon, 'text-danger': !hasWon}">{{message}}</h2>
+      <h3 class="text-danger">{{incorrectItems}} Incorrect Answers</h3>
       <div class="row text-center">
         <div class="col-xs-4">
           <h2>Fruits</h2>
