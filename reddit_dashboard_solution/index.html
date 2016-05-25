@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="RedditDashboardApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Reddit Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.11/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/CommentsModalCtrl.js"></script>
+    <script src="js/RedditDashboardCtrl.js"></script>
+  </head>
+
+  <body ng-controller="RedditDashboard">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Reddit Dashboard</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" ng-click="searchClear()">Clear</a></li>
+          </ul>
+          <form ng-submit="search()" class="navbar-form navbar-right">
+            <input type="text" ng-model="searchTerm" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <h4>History</h4>
+          <ul class="nav nav-sidebar">
+            <li ng-repeat="item in history" ng-class="{active:historySelected==$index}">
+              <a href="" ng-click="historyDelete($index)" class="deletex">x</a>
+              <a href="" ng-click="historySelect($index)">{{item}}</a>
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 " ng-hide="searchResults.length > 0">
+          Enter a search term or select an item on the left.
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" ng-show="loading">
+          <br><br>
+          <h2 class="text-center">Loading...</h2>
+        </div>     
+        <div ng-if="searchResults.length > 0" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 class="sub-header">Featured Posts</h2>
+          <div class="row placeholders">
+            <div ng-repeat="item in searchFeatured" class="col-xs-6 col-sm-3 placeholder">
+              <img ng-src="{{item.data.thumbnail}}" class="img-responsive">
+              <h4>Score: {{item.data.score}}</h4>
+              <span class="text-muted">{{item.data.title}}</span>
+            </div>
+          </div>
+
+          <h2 class="sub-header">All Posts</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Score</th>
+                  <th>Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in searchResults">
+                  <td>{{item.data.title | limitTo: 100}}</td>
+                  <td>{{item.data.author}}</td>
+                  <td>{{item.data.score}}</td>
+                  <td nowrap>{{(item.data.created*1000) | date: 'short'}}</td>
+                  <td>
+                    <a ng-href="http://www.reddit.com{{item.data.permalink}}" target="_blank" class="btn btn-primary btn-xs">Comments {{item.data.num_comments}}</a>
+                    <br><br>
+                    <a ng-click="showComments($index)" class="btn btn-primary btn-xs">Comments (modal)</a>
+                    <br><br>
+                    <a ng-href="{{item.data.url}}" target="_blank" class="btn btn-primary btn-xs">View</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
