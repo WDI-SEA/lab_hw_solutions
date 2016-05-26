@@ -1,0 +1,6 @@
+<button class="btn btn-danger" ng-click="goToAbout()">About Page</button>
+<div class="well" ng-repeat="film in films | orderBy: 'release_date' track by $index">
+  <h2><a ng-href="http://localhost:8080/starwarsapp/#/films/{{$index + 1}}">{{film.title}}</a> <small>Episode: {{film.episode_id}}</small></h2>
+  <button class="btn btn-info" ng-click="showMovie($index + 1)">Show Movie</button>
+  <p>{{film.opening_crawl}}</p>
+</div>
